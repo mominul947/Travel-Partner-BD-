@@ -359,6 +359,67 @@
     max-height: 100%;
     object-fit: contain;
 }
+/* WhatsApp Floating Button Styles */
+.whatsapp-float {
+    position: fixed;
+    bottom: 85px; /* মোবাইল নেভবারের উপরে থাকার জন্য */
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999; /* যেন সব কন্টেন্টের উপরে থাকে */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: wa-pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    color: white;
+    background-color: #128c7e;
+}
+
+/* ডেস্কটপের জন্য পজিশন কিছুটা নিচে নামানো */
+@media (min-width: 768px) {
+    .whatsapp-float {
+        bottom: 30px;
+    }
+}
+
+/* বাটন এনিমেশন */
+@keyframes wa-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ছোট টুলটিপ (ঐচ্ছিক) */
+.wa-tooltip {
+    position: absolute;
+    right: 70px;
+    background: #333;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.whatsapp-float:hover .wa-tooltip {
+    opacity: 1;
+}
     </style>
 </head>
 
@@ -767,6 +828,14 @@
             </div>
         </section>
     </div>
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/8801611744150?text=Hello Travel Partner BD! I want to know more about your tour packages." 
+   class="whatsapp-float" 
+   target="_blank" 
+   aria-label="Chat with us on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="wa-tooltip">Contact Us</span>
+</a>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <script>
