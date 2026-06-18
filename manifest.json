@@ -1,0 +1,21 @@
+{
+  "name": "Travel Partner BD - Tour & Travel",
+  "short_name": "Travel Partner",
+  "description": "Best Tour Packages & Travel Solutions in Bangladesh",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#004D39",
+  "icons": [
+    {
+      "src": "https://cdn.phototourl.com/member/2026-05-11-f794e908-eeb4-479c-ac42-66b5b1cbcdb3.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://cdn.phototourl.com/member/2026-05-11-f794e908-eeb4-479c-ac42-66b5b1cbcdb3.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
