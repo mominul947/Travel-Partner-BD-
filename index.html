@@ -497,111 +497,109 @@
         </section>
     </div>
     
-    <div id="checkout-modal" class="fixed inset-0 bg-white z-[1100] hidden overflow-y-auto">
+<!-- ১. চেকআউট সেকশন আপডেট -->
+<div id="checkout-modal" class="fixed inset-0 bg-white z-[1100] hidden overflow-y-auto">
 
-        
-        <div class="sticky top-0 bg-white border-b p-4 flex items-center justify-between z-[1150] shadow-sm">
-            <button onclick="closeCheckout()" class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full transition-all text-gray-600">
-                <i class="fa-solid fa-arrow-left text-xl"></i>
-            </button>
-            <h2 class="font-bold text-lg text-[#004D39]">Checkout Order</h2>
-            <div class="w-10"></div>
-        </div>
+    <!-- Sticky Header -->
+    <div class="sticky top-0 bg-white border-b p-4 flex items-center justify-between z-[1150] shadow-sm">
+        <button onclick="closeCheckout()" class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-full transition-all text-gray-600">
+            <i class="fa-solid fa-arrow-left text-xl"></i>
+        </button>
+        <h2 class="font-bold text-lg text-[#004D39]">Booking Details</h2>
+        <div class="w-10"></div>
+    </div>
 
-        
-        <div class="container mx-auto px-4 py-6 max-w-2xl pb-52">
+    <div class="container mx-auto px-4 py-6 max-w-2xl pb-52">
 
-           
-            <div class="bg-gray-50 p-5 rounded-3xl mb-6 space-y-4 border border-gray-100">
-                <h3 class="font-bold text-[#004D39] flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-truck-fast"></i> Shipping Details
-                </h3>
+        <!-- Passenger & Trip Details -->
+        <div class="bg-gray-50 p-5 rounded-3xl mb-6 space-y-4 border border-gray-100">
+            <h3 class="font-bold text-[#004D39] flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-user-tag"></i> Passenger & Trip Details
+            </h3>
 
+            <!-- Name & Phone -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Full Name</label>
-                    <input type="text" id="ship-name" placeholder="Enter your full name" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-[#004D39] bg-white transition-all">
+                    <input type="text" id="ship-name" placeholder="Enter full name" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-[#004D39] bg-white transition-all">
                 </div>
-
                 <div class="space-y-1">
                     <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Phone Number</label>
                     <input type="tel" id="ship-number" placeholder="01XXXXXXXXX" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 focus:ring-2 focus:ring-[#004D39] bg-white transition-all">
                 </div>
+            </div>
 
-             
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Division</label>
-                        <select id="ship-division" onchange="updateDistricts()" class="w-full p-3.5 rounded-2xl ring-1 ring-gray-200 outline-none bg-white text-sm focus:ring-2 focus:ring-[#004D39]">
-                            <option value="">Select Division</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">District</label>
-                        <select id="ship-district" onchange="updateUpazilas()" class="w-full p-3.5 rounded-2xl ring-1 ring-gray-200 outline-none bg-white text-sm focus:ring-2 focus:ring-[#004D39]">
-                            <option value="">Select District</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Upazila</label>
-                        <select id="ship-upazila" class="w-full p-3.5 rounded-2xl ring-1 ring-gray-200 outline-none bg-white text-sm focus:ring-2 focus:ring-[#004D39]">
-                            <option value="">Select Upazila</option>
-                        </select>
-                    </div>
-                </div>
-
+            <!-- Gender & Luggage -->
+            <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-1">
-                    <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Full Address</label>
-                    <textarea id="ship-address" placeholder="Village, House, Road No, Area..." class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 h-24 bg-white focus:ring-2 focus:ring-[#004D39]"></textarea>
+                    <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Gender</label>
+                    <select id="ship-gender" class="w-full p-3.5 rounded-2xl ring-1 ring-gray-200 outline-none bg-white text-sm focus:ring-2 focus:ring-[#004D39]">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
-
-              
-                <div class="border-2 border-dashed border-emerald-100 p-4 rounded-3xl bg-emerald-50/50">
-                    <button onclick="getLocation()" class="w-full bg-white text-[#004D39] px-4 py-3 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 border border-emerald-200 shadow-sm active:scale-95 transition-all">
-                        <i class="fa-solid fa-location-crosshairs text-emerald-600"></i> Detect My Live Location
-                    </button>
-                    <div id="map-preview" class="h-32 mt-3 rounded-2xl hidden border border-emerald-100 shadow-inner"></div>
-                    <input type="hidden" id="ship-coords">
-                </div>
-
-                <input type="text" id="order-note" placeholder="Note to seller (Optional)" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 bg-white focus:ring-2 focus:ring-[#004D39]">
-            </div>
-
-           
-            <div id="order-summary-box" class="bg-white border border-gray-100 rounded-[32px] p-6 mb-6 shadow-sm">
-                <h3 class="font-bold mb-4 text-gray-800 flex items-center gap-2">
-                    <i class="fa-solid fa-receipt text-gray-400"></i> Order Summary
-                </h3>
-                <div id="checkout-items-list" class="space-y-3 mb-4">
-                
-                </div>
-                <div class="border-t border-dashed pt-4 space-y-3">
-                    <div class="flex justify-between text-gray-500 text-sm"><span>Subtotal</span><span id="summ-subtotal" class="font-bold">৳ 0</span></div>
-                    <div class="flex justify-between text-gray-500 text-sm"><span>Delivery Charge</span><span id="summ-delivery" class="font-bold">৳ 0</span></div>
-                    <div class="flex justify-between font-black text-xl text-[#004D39] pt-2 border-t">
-                        <span>Total Bill</span><span id="summ-total">৳ 0</span>
-                    </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Luggage Option</label>
+                    <select id="ship-luggage" class="w-full p-3.5 rounded-2xl ring-1 ring-gray-200 outline-none bg-white text-sm focus:ring-2 focus:ring-[#004D39]">
+                        <option value="1">1 Piece</option>
+                        <option value="2">2 Pieces</option>
+                        <option value="3">3 Pieces</option>
+                        <option value="4">4 Pieces</option>
+                    </select>
                 </div>
             </div>
 
-          
-            <div class="bg-white border border-gray-100 p-6 rounded-[32px] shadow-sm">
-                <h3 class="font-bold mb-4 text-gray-800 text-xs uppercase tracking-widest">Payment Method</h3>
-                <div id="payment-options" class="space-y-3">
-                  
+            <!-- Pickup & Drop Points -->
+            <div class="space-y-1">
+                <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Pickup Point Address</label>
+                <input type="text" id="ship-pickup" placeholder="From where will you start?" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 bg-white focus:ring-2 focus:ring-[#004D39] transition-all">
+            </div>
+
+            <div class="space-y-1">
+                <label class="text-[10px] font-bold text-gray-400 ml-2 uppercase">Drop Point Address</label>
+                <input type="text" id="ship-drop" placeholder="Where do you want to drop off?" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 bg-white focus:ring-2 focus:ring-[#004D39] transition-all">
+            </div>
+
+            <input type="text" id="order-note" placeholder="Note to seller (Optional)" class="w-full p-3.5 rounded-2xl border-none outline-none ring-1 ring-gray-200 bg-white focus:ring-2 focus:ring-[#004D39]">
+        </div>
+
+        <!-- Order Summary -->
+        <div id="order-summary-box" class="bg-white border border-gray-100 rounded-[32px] p-6 mb-6 shadow-sm">
+            <h3 class="font-bold mb-4 text-gray-800 flex items-center gap-2">
+                <i class="fa-solid fa-receipt text-gray-400"></i> Order Summary
+            </h3>
+            <div id="checkout-items-list" class="space-y-3 mb-4">
+                <!-- Items will be loaded here by JS -->
+            </div>
+            <div class="border-t border-dashed pt-4 space-y-3">
+                <div class="flex justify-between text-gray-500 text-sm"><span>Subtotal</span><span id="summ-subtotal" class="font-bold">৳ 0</span></div>
+                <div class="flex justify-between text-gray-500 text-sm"><span>Processing Fee</span><span id="summ-delivery" class="font-bold">৳ 0</span></div>
+                <div class="flex justify-between font-black text-xl text-[#004D39] pt-2 border-t">
+                    <span>Total Amount</span><span id="summ-total">৳ 0</span>
                 </div>
             </div>
         </div>
 
-        
-        <div class="fixed bottom-[65px] left-0 right-0 p-4 bg-white/90 backdrop-blur-md border-t z-[1200] md:bottom-0 shadow-[0_-15px_30px_rgba(0,0,0,0.08)] rounded-t-[32px]">
-            <div class="max-w-2xl mx-auto">
-                <button onclick="placeOrder()" id="place-order-btn" class="w-full bg-[#004D39] text-white py-4.5 rounded-2xl font-bold shadow-xl active:scale-95 transition-all flex items-center justify-center gap-3 text-lg h-16 shadow-emerald-900/20">
-                    <span>CONFIRM ORDER</span>
-                    <i class="fa-solid fa-circle-check"></i>
-                </button>
+        <!-- Payment Method -->
+        <div class="bg-white border border-gray-100 p-6 rounded-[32px] shadow-sm">
+            <h3 class="font-bold mb-4 text-gray-800 text-xs uppercase tracking-widest">Payment Method</h3>
+            <div id="payment-options" class="space-y-3">
+                <!-- Payment options will be loaded here by JS -->
             </div>
         </div>
     </div>
+
+    <!-- Fixed Bottom Button -->
+    <div class="fixed bottom-[65px] left-0 right-0 p-4 bg-white/90 backdrop-blur-md border-t z-[1200] md:bottom-0 shadow-[0_-15px_30px_rgba(0,0,0,0.08)] rounded-t-[32px]">
+        <div class="max-w-2xl mx-auto">
+            <button onclick="placeOrder()" id="place-order-btn" class="w-full bg-[#004D39] text-white py-4.5 rounded-2xl font-bold shadow-xl active:scale-95 transition-all flex items-center justify-center gap-3 text-lg h-16 shadow-emerald-900/20">
+                <span>CONFIRM BOOKING</span>
+                <i class="fa-solid fa-circle-check"></i>
+            </button>
+        </div>
+    </div>
+</div>
    
     <div id="product-detail-view" class="fixed inset-0 bg-white z-[500] hidden overflow-y-auto">
      
@@ -2131,121 +2129,88 @@ async function fetchCategories() {
         }
 
      
-        window.viewOrderDetails = (orderId) => {
-            const order = userOrdersList.find(o => o.id === orderId);
-            if (!order) return;
-
-            const content = document.getElementById('order-detail-content');
-            const view = document.getElementById('order-detail-view');
-
         
-            let dateStr = "N/A";
-            let timeStr = "N/A";
-            if (order.createdAt) {
-                const dateObj = new Date(order.createdAt.toDate());
-                dateStr = dateObj.toLocaleDateString('en-GB', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric'
-                });
-                timeStr = dateObj.toLocaleTimeString('en-US', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            }
 
-         
-            const itemsHtml = order.items.map(item => {
-              
-                let attrsHtml = '';
-                if (item.selectedAttrs) {
-                    attrsHtml = Object.entries(item.selectedAttrs).map(([key, val]) =>
-                        `<span class="bg-[#004D39] text-white px-2 py-0.5 rounded-md text-[9px] mr-1 capitalize shadow-sm">${key}: ${val}</span>`
-                    ).join('');
-                }
-                return `
-                <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl border border-gray-100">
-                    <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover border border-white shadow-sm bg-white">
+      window.viewOrderDetails = (orderId) => {
+    const order = userOrdersList.find(o => o.id === orderId);
+    if (!order) return;
+
+    const content = document.getElementById('order-detail-content');
+    const view = document.getElementById('order-detail-view');
+
+    // লজিক: টোটাল থেকে পেইড (৫১০ টাকা) বিয়োগ করে ডিউ বের করা
+    const totalAmount = Number(order.totalAmount) || 0;
+    const paidAmount = Number(order.paidAmount) || 0;
+    const dueAmount = totalAmount - paidAmount;
+
+    let dateStr = order.createdAt ? new Date(order.createdAt.toDate()).toLocaleDateString('en-GB') : 'Processing';
+
+    content.innerHTML = `
+        <!-- প্রিমিয়াম স্ট্যাটাস হেডার -->
+        <div class="bg-gradient-to-r from-[#004D39] to-emerald-600 rounded-[32px] p-7 text-white shadow-xl relative overflow-hidden mb-6">
+            <div class="relative z-10">
+                <p class="text-[10px] font-bold opacity-70 uppercase tracking-widest mb-1">Booking ID: #${order.id.slice(-6)}</p>
+                <h3 class="text-3xl font-black capitalize">${order.status}</h3>
+                <p class="text-[11px] mt-2 font-medium bg-white/20 inline-block px-3 py-1 rounded-full"><i class="fa-regular fa-calendar-check mr-1"></i> ${dateStr}</p>
+            </div>
+            <i class="fa-solid fa- suitcase-rolling absolute right-[-10px] bottom-[-10px] text-8xl opacity-10"></i>
+        </div>
+
+        <!-- ট্রিপ ইনফরমেশন -->
+        <div class="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm space-y-5 mb-4">
+            <h4 class="text-[11px] font-black text-gray-400 uppercase tracking-[2px] flex items-center gap-2"><i class="fa-solid fa-map-location-dot text-emerald-600"></i> Trip Information</h4>
+            <div class="grid grid-cols-2 gap-6">
+                <div><p class="text-[10px] text-gray-400 font-bold uppercase">Passenger</p><p class="text-sm font-black text-gray-800">${order.customerName}</p></div>
+                <div><p class="text-[10px] text-gray-400 font-bold uppercase">Luggage</p><p class="text-sm font-black text-gray-800">${order.luggage || 0} Pieces</p></div>
+                <div class="col-span-2 border-t pt-3"><p class="text-[10px] text-emerald-600 font-bold uppercase">Pickup Point</p><p class="text-sm font-bold text-gray-700">${order.pickupPoint}</p></div>
+                <div class="col-span-2 border-t pt-3"><p class="text-[10px] text-red-500 font-bold uppercase">Drop Point</p><p class="text-sm font-bold text-gray-700">${order.dropPoint}</p></div>
+            </div>
+        </div>
+
+        <!-- পেমেন্ট ও ডিউ ক্যালকুলেশন (আপনার চাহিদামতো ডিজাইন) -->
+        <div class="bg-white p-6 rounded-[32px] border border-gray-100 shadow-sm mb-4">
+            <h4 class="text-[11px] font-black text-gray-400 uppercase tracking-[2px] mb-4"><i class="fa-solid fa-receipt text-emerald-600"></i> Billing Details</h4>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500 font-bold">Package Total</span>
+                    <span class="font-black text-gray-800">৳${totalAmount}</span>
+                </div>
+                <div class="flex justify-between items-center bg-emerald-50 p-4 rounded-2xl border border-emerald-100">
+                    <div>
+                        <span class="text-emerald-700 font-black block text-sm">Advance Paid</span>
+                        <span class="text-[10px] text-emerald-600">বুকিং কনফার্ম মানি</span>
+                    </div>
+                    <span class="text-xl font-black text-emerald-700">৳${paidAmount}</span>
+                </div>
+                <div class="flex justify-between items-center bg-red-50 p-4 rounded-2xl border border-red-100">
+                    <div>
+                        <span class="text-red-700 font-black block text-sm">Due Amount</span>
+                        <span class="text-[10px] text-red-600">ভ্রমণের সময় পরিশোধযোগ্য</span>
+                    </div>
+                    <span class="text-xl font-black text-red-700">৳${dueAmount}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- প্যাকেজ আইটেম -->
+        <div class="space-y-3">
+            <h4 class="text-[11px] font-black text-gray-400 uppercase tracking-[2px] px-2">Included Packages</h4>
+            ${order.items.map(item => `
+                <div class="flex items-center gap-4 bg-white p-4 rounded-3xl border border-gray-100">
+                    <img src="${item.image}" class="w-14 h-14 rounded-2xl object-cover shadow-sm">
                     <div class="flex-1">
-                        <h4 class="text-[12px] font-bold text-gray-800 line-clamp-2 leading-tight">${item.name}</h4>
-                        <div class="mt-1.5 flex flex-wrap gap-1">${attrsHtml}</div>
-                        <p class="text-[10px] text-gray-500 font-bold mt-1">Qty: <span class="text-gray-800">${item.quantity}</span></p>
+                        <h5 class="text-sm font-bold text-gray-800">${item.name}</h5>
+                        <p class="text-[10px] font-bold text-gray-400">Qty: ${item.quantity}</p>
                     </div>
-                    <div class="text-right">
-                        <p class="text-[13px] font-black text-[#004D39]">৳${item.price}</p>
-                    </div>
-                </div>`;
-            }).join('');
-
-          
-            content.innerHTML = `
-             
-                <div class="bg-gradient-to-r from-[#004D39] to-emerald-600 rounded-3xl p-6 text-white shadow-lg shadow-emerald-900/20 relative overflow-hidden">
-                    <div class="absolute right-[-20px] top-[-20px] opacity-10 text-8xl"><i class="fa-solid fa-box-open"></i></div>
-                    <p class="text-[11px] font-bold opacity-80 mb-1 uppercase tracking-widest">Order ID: #${order.id}</p>
-                    <h3 class="text-2xl font-black mb-3 capitalize">${order.status} Order</h3>
-                    <div class="flex items-center gap-5 text-[12px] font-medium opacity-90">
-                        <span class="flex items-center gap-1.5"><i class="fa-regular fa-calendar text-emerald-200"></i> ${dateStr}</span>
-                        <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-emerald-200"></i> ${timeStr}</span>
-                    </div>
+                    <p class="font-black text-[#004D39]">৳${item.price}</p>
                 </div>
+            `).join('')}
+        </div>
+    `;
 
-         
-                <div class="mt-6">
-                    <h4 class="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3 px-1">Purchased Items (${order.items.length})</h4>
-                    <div class="space-y-3 bg-white p-2 rounded-3xl border border-gray-100 shadow-sm">
-                        ${itemsHtml}
-                    </div>
-                </div>
-
-              
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <!-- Shipping Info -->
-                    <div class="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm">
-                        <h4 class="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2"><i class="fa-solid fa-location-dot"></i> Shipping Info</h4>
-                        <div class="space-y-3 text-[13px] text-gray-700">
-                            <div class="flex items-start gap-2">
-                                <span class="font-bold text-gray-400 w-16">Name:</span> 
-                                <span class="font-bold text-gray-800 flex-1">${order.customerName}</span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="font-bold text-gray-400 w-16">Phone:</span> 
-                                <span class="font-black text-[#004D39] flex-1">${order.customerNumber}</span>
-                            </div>
-                            <div class="flex items-start gap-2 border-t pt-3 mt-1">
-                                <span class="font-bold text-gray-400 w-16">Address:</span> 
-                                <span class="font-medium text-gray-600 flex-1 leading-relaxed">${order.address.details}, ${order.address.upazila}, ${order.address.district}, ${order.address.division}</span>
-                            </div>
-                        </div>
-                    </div>
-
-              
-                    <div class="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm">
-                        <h4 class="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2"><i class="fa-solid fa-wallet"></i> Payment Info</h4>
-                        <div class="space-y-3 text-[13px] text-gray-700">
-                            <div class="flex justify-between items-center border-b pb-2">
-                                <span class="font-bold text-gray-400">Method:</span> 
-                                <span class="font-bold text-gray-800 bg-gray-50 px-2 py-1 rounded-md text-[11px] border">${order.paymentMethod}</span>
-                            </div>
-                            ${order.transactionId && order.transactionId !== 'N/A' ? `
-                            <div class="flex justify-between items-center border-b pb-2">
-                                <span class="font-bold text-gray-400">Trx ID:</span> 
-                                <span class="font-black text-gray-800 uppercase">${order.transactionId}</span>
-                            </div>` : ''}
-                            <div class="flex justify-between items-center pt-1">
-                                <span class="font-black text-gray-800">Total Bill:</span> 
-                                <span class="font-black text-xl text-[#004D39]">${order.totalAmount}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            view.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; 
-        };
-
-      
+    view.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; 
+};
         window.closeOrderDetails = () => {
             document.getElementById('order-detail-view').classList.add('hidden');
             document.body.style.overflow = 'auto';
@@ -2339,42 +2304,57 @@ async function fetchCategories() {
 
       
         async function openCheckout(items = []) {
-            if (!currentUser) {
-                premiumAlert('warning', 'Login Required', 'অর্ডার করতে দয়া করে আগে লগইন করুন।');
-                showAppPage('profile');
-                return;
-            }
+    // ১. লগইন চেক
+    if (!currentUser) {
+        premiumAlert('warning', 'Login Required', 'বুকিং করতে দয়া করে আগে লগইন করুন।');
+        showAppPage('profile');
+        return;
+    }
 
-            currentCheckoutItems = items.length > 0 ? items : cart;
-            if (currentCheckoutItems.length === 0) {
-                toast('error', 'Cart is empty!');
-                return;
-            }
+    // ২. চেকআউট আইটেম নির্ধারণ (Buy Now হলে সরাসরি items আসবে, কার্ট থেকে আসলে cart থেকে ফিল্টার হবে)
+    if (items.length > 0) {
+        currentCheckoutItems = items;
+    } else {
+        currentCheckoutItems = cart.filter(i => i.isSelected !== false);
+    }
 
-            document.getElementById('checkout-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+    // ৩. যদি কোনো প্রোডাক্ট সিলেক্ট করা না থাকে
+    if (!currentCheckoutItems || currentCheckoutItems.length === 0) {
+        toast('error', 'কোনো প্যাকেজ সিলেক্ট করা হয়নি!');
+        return;
+    }
 
-            loadBDDivisions();
-            renderCheckoutSummary();
+    // ৪. মোডাল দেখানো এবং স্ক্রল লক করা
+    document.getElementById('checkout-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 
-           
-            const ruleId = currentCheckoutItems[0].deliveryRule;
-            if (ruleId) {
-                try {
-                    const ruleDoc = await db.collection('delivery_rules').doc(ruleId).get();
-                    if (ruleDoc.exists) {
-                        selectedDeliveryRule = ruleDoc.data();
-                        renderPaymentOptions(selectedDeliveryRule);
-                    } else {
-                        setFallbackPayment();
-                    }
-                } catch (e) {
-                    setFallbackPayment();
-                }
+    // ৫. প্রোডাক্ট সামারি এবং ৫১০ টাকা অগ্রিম নোট রেন্ডার করা
+    // নোট: loadBDDivisions() ফাংশনটি এখানে দরকার নেই যেহেতু আপনি পিকআপ/ড্রপ পয়েন্ট ব্যবহার করছেন
+    if (typeof renderCheckoutSummary === "function") {
+        renderCheckoutSummary();
+    }
+
+    // ৬. ডেলিভারি/পেমেন্ট রুল লোড করা
+    const firstItem = currentCheckoutItems[0];
+    const ruleId = firstItem.deliveryRule;
+
+    if (ruleId) {
+        try {
+            const ruleDoc = await db.collection('delivery_rules').doc(ruleId).get();
+            if (ruleDoc.exists) {
+                selectedDeliveryRule = ruleDoc.data();
+                renderPaymentOptions(selectedDeliveryRule);
             } else {
                 setFallbackPayment();
             }
+        } catch (e) {
+            console.error("Payment Rule Error:", e);
+            setFallbackPayment();
         }
+    } else {
+        setFallbackPayment();
+    }
+}
 
        
         function loadBDDivisions() {
@@ -2656,68 +2636,85 @@ function fallbackCopyText(text, message) {
      
         async function placeOrder() {
     const btn = document.getElementById('place-order-btn');
-    const name = document.getElementById('ship-name').value;
-    const phone = document.getElementById('ship-number').value;
-    const division = document.getElementById('ship-division').value;
-    const district = document.getElementById('ship-district').value;
-    const upazila = document.getElementById('ship-upazila').value;
-    const address = document.getElementById('ship-address').value;
+    
+    // ইনপুট ফিল্ড থেকে ডাটা সংগ্রহ
+    const name = document.getElementById('ship-name').value.trim();
+    const phone = document.getElementById('ship-number').value.trim();
+    const gender = document.getElementById('ship-gender').value;
+    const luggage = document.getElementById('ship-luggage').value;
+    const pickup = document.getElementById('ship-pickup').value.trim();
+    const drop = document.getElementById('ship-drop').value.trim();
+    const note = document.getElementById('order-note').value.trim();
 
-    if (!name || !phone || !division || !district || !upazila || !address) {
-        return premiumAlert('error', 'Required!', 'শিপিং তথ্য পূরণ করুন।');
+    // ভ্যালিডেশন: প্রয়োজনীয় তথ্য পূরণ করা হয়েছে কিনা পরীক্ষা
+    if (!name || !phone || !pickup || !drop) {
+        return premiumAlert('error', 'তথ্য বাকি আছে!', 'দয়া করে যাত্রী ও ট্রিপের সব তথ্য পূরণ করুন।');
     }
 
+    // পেমেন্ট মেথড চেক
     const payMethodEl = document.querySelector('input[name="pay-method"]:checked');
     if (!payMethodEl) return toast('error', 'পেমেন্ট মেথড সিলেক্ট করুন');
 
     const payMethod = payMethodEl.value;
-    const trxId = document.getElementById('trx-id-input') ? document.getElementById('trx-id-input').value.trim() : '';
-    const payAmount = document.getElementById('pay-amount-input') ? document.getElementById('pay-amount-input').value.trim() : '0';
+    const trxId = document.getElementById('trx-id-input') ? document.getElementById('trx-id-input').value.trim() : 'N/A';
+    const payAmountInput = document.getElementById('pay-amount-input') ? document.getElementById('pay-amount-input').value.trim() : '0';
 
-    // ভ্যালিডেশন
+    // অনলাইন পেমেন্টের ক্ষেত্রে ট্রানজেকশন আইডি ও টাকা চেক করা
     if (payMethod !== 'COD') {
-        if (!trxId) return premiumAlert('warning', 'TrxID Required', 'ট্রানজেকশন আইডি দিন।');
-        if (!payAmount || payAmount === '0') return premiumAlert('warning', 'Amount Required', 'পেমেন্টকৃত টাকার পরিমাণ লিখুন।');
+        if (!trxId || trxId === 'N/A') return premiumAlert('warning', 'TrxID দিন', 'পেমেন্টের ট্রানজেকশন আইডিটি দিন।');
+        if (!payAmountInput || payAmountInput === '0') return premiumAlert('warning', 'টাকার পরিমাণ', 'কত টাকা পাঠিয়েছেন তা লিখুন।');
     }
 
+    // টোটাল বিল ক্লিন করা (৳ চিহ্ন সরিয়ে শুধুমাত্র নম্বর রাখা)
+    const totalRaw = document.getElementById('summ-total').innerText.replace(/[^\d]/g, '');
+    const totalAmount = Number(totalRaw);
+    const paidAmount = Number(payAmountInput);
+
+    // ফায়ারবেসে সেভ করার জন্য অবজেক্ট তৈরি
     const orderData = {
         customerName: name,
         customerNumber: phone,
         customerEmail: currentUser.email,
-        address: {
-            division,
-            district,
-            upazila,
-            details: address,
-            coords: document.getElementById('ship-coords').value
-        },
+        gender: gender,
+        luggage: luggage,
+        pickupPoint: pickup,
+        dropPoint: drop,
+        note: note,
         items: currentCheckoutItems,
-        totalAmount: document.getElementById('summ-total').innerText,
+        totalAmount: totalAmount,
+        paidAmount: paidAmount, // ইউজার যা এডভান্স করলো
         paymentMethod: payMethod,
-        transactionId: trxId || 'N/A',
-        paidAmount: payAmount || '0', // নতুন ফিল্ড যুক্ত হলো
+        transactionId: trxId,
         status: 'pending',
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
+    // বাটন ডিজেবল ও লোডিং টেক্সট
     btn.disabled = true;
-    btn.innerText = "Placing Order...";
+    btn.innerText = "Processing...";
 
     try {
+        // ফায়ারবেস স্টোরে সেভ করা
         await db.collection('orders').add(orderData);
-        premiumAlert('success', 'Success', 'অর্ডারটি সফলভাবে সম্পন্ন হয়েছে!');
+        
+        premiumAlert('success', 'বুকিং সফল!', 'আপনার ট্যুর বুকিংটি পেন্ডিং অবস্থায় আছে। শীঘ্রই আমাদের প্রতিনিধি যোগাযোগ করবেন।');
+        
+        // কার্ট ক্লিয়ার করা (যে আইটেমগুলো বুকিং করা হয়েছে)
         cart = cart.filter(item => !currentCheckoutItems.find(ci => ci.id === item.id));
         updateCart();
+        
+        // মোডাল বন্ধ ও অর্ডার পেজে নিয়ে যাওয়া
         closeCheckout();
         showAppPage('orders');
+        
     } catch (e) {
-        alert("Error placing order: " + e.message);
+        console.error(e);
+        alert("বুকিং করতে সমস্যা হয়েছে: " + e.message);
     } finally {
         btn.disabled = false;
-        btn.innerHTML = '<span>CONFIRM ORDER</span> <i class="fa-solid fa-circle-check"></i>';
+        btn.innerHTML = '<span>CONFIRM BOOKING</span> <i class="fa-solid fa-circle-check"></i>';
     }
 }
-
         function closeCheckout() {
             document.getElementById('checkout-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
