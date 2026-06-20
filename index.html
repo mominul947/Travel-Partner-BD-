@@ -834,6 +834,24 @@
     <i class="fa-brands fa-whatsapp"></i>
     <span class="wa-tooltip">Contact Us</span>
 </a>
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1339644814980691');
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1339644814980691&ev=PageView&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <script>
@@ -1188,6 +1206,14 @@ ${imageList.map((img, idx) => `
             }
         }
     });
+// openProductDetail ফাংশনের ভেতরে শেষের দিকে বসান
+fbq('track', 'ViewContent', {
+    content_name: product.name,
+    content_ids: [product.id],
+    content_type: 'product',
+    value: product.price,
+    currency: 'BDT'
+});
 
     window.syncThumb = (index) => swiper.slideToLoop(index);
     setTimeout(() => document.getElementById('thumb-0')?.classList.add('border-[#004D39]'), 100);
@@ -1337,23 +1363,47 @@ function initSwiper() {
             console.log("Selected:", tempSelectedAttrs);
         };
         
-        window.addToCart = (id) => {
-            const product = products.find(p => p.id === id);
-            const exists = cart.find(item => item.id === id);
+        window.addToCart = (id, isFromDetail = false) => {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
 
-            if (exists) {
-                exists.quantity += 1;
-            } else {
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-            }
+    // ফেসবুক পিক্সেল AddToCart ইভেন্ট
+    fbq('track', 'AddToCart', {
+        content_name: product.name,
+        content_ids: [product.id],
+        content_type: 'product',
+        value: product.price,
+        currency: 'BDT'
+    });
 
-            updateCart();
-            openCart();
-        };
-       
+    let qtyToAdd = isFromDetail ? (window.tempDetailQty || 1) : 1;
+
+    const existsIndex = cart.findIndex(item =>
+        item.id === id &&
+        JSON.stringify(item.selectedAttrs || {}) === JSON.stringify(tempSelectedAttrs || {})
+    );
+
+    if (existsIndex > -1) {
+        cart[existsIndex].quantity += qtyToAdd;
+    } else {
+        cart.push({
+            ...product,
+            selectedAttrs: { ...tempSelectedAttrs }, 
+            quantity: qtyToAdd,
+            isSelected: true
+        });
+    }
+
+    tempSelectedAttrs = {};
+    if (isFromDetail) {
+        window.tempDetailQty = 1; 
+        const detailQtyDisp = document.getElementById('detail-qty-display');
+        if (detailQtyDisp) detailQtyDisp.innerText = "1";
+    }
+
+    updateCart();
+    toast('success', `${qtyToAdd} টি পণ্য কার্টে যোগ করা হয়েছে!`);
+};
         window.updateDetailQty = (change) => {
             window.tempDetailQty += change;
             if (window.tempDetailQty < 1) window.tempDetailQty = 1; 
@@ -1560,7 +1610,10 @@ document.getElementById('search-input').addEventListener('keydown', function(e) 
         const heroSlider = document.querySelector('.mySwiper').closest('section');
         const categorySection = document.getElementById('user-category-list').closest('section');
         const sectionHeading = document.querySelector('#home-content h2');
-
+// সার্চ লজিকের ভেতরে বসান
+fbq('track', 'Search', {
+    search_string: query
+});
         if (query === "") {
             // যদি সার্চ বক্স খালি থাকে, সব আগের মতো রিসেট হবে
             if(heroSlider) heroSlider.classList.remove('hidden');
@@ -2337,7 +2390,11 @@ async function fetchCategories() {
     // ৬. ডেলিভারি/পেমেন্ট রুল লোড করা
     const firstItem = currentCheckoutItems[0];
     const ruleId = firstItem.deliveryRule;
-
+// openCheckout ফাংশনের ভেতরে বসান
+fbq('track', 'InitiateCheckout', {
+    currency: 'BDT',
+    num_items: items.length
+});
     if (ruleId) {
         try {
             const ruleDoc = await db.collection('delivery_rules').doc(ruleId).get();
@@ -2696,7 +2753,16 @@ function fallbackCopyText(text, message) {
     try {
         // ফায়ারবেস স্টোরে সেভ করা
         await db.collection('orders').add(orderData);
-        
+        // placeOrder ফাংশনের সফল বুকিং এর পর বসান
+fbq('track', 'Purchase', {
+    value: totalAmount,
+    currency: 'BDT',
+    content_type: 'product',
+    contents: currentCheckoutItems.map(item => ({
+        id: item.id,
+        quantity: item.quantity
+    }))
+});
         premiumAlert('success', 'বুকিং সফল!', 'আপনার ট্যুর বুকিংটি পেন্ডিং অবস্থায় আছে। শীঘ্রই আমাদের প্রতিনিধি যোগাযোগ করবেন।');
         
         // কার্ট ক্লিয়ার করা (যে আইটেমগুলো বুকিং করা হয়েছে)
